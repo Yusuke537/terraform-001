@@ -7,7 +7,6 @@ on:
     branches:
       - feature
   pull_request:
-    types: [closed]
     branches: 
       - master
 
@@ -48,5 +47,5 @@ jobs:
 
     - name: Terraform Apply
       #if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      if: github.ref == 'refs/heads/master' && github.event.pull_request.closed == true
+      if: github.ref == 'refs/heads/master' && github.event.pull_request.merged == true
       run: terraform apply -auto-approve $SOURCE_DIR
