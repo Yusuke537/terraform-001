@@ -20,3 +20,10 @@ jobs:
         ME: ${{ secrets.ME }}
       run: |
         echo $Identity$ME
+    - name: print secrets
+      run: |
+          echo $ME >> .env
+          cat .env
+      shell: bash
+      env:
+        ME : ${{secrets.ME}}
