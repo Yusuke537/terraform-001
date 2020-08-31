@@ -18,8 +18,9 @@ jobs:
       env:
         Identity: This is me 
         ME: ${{ secrets.ME }}
+        SPLIT: sed 's/./&\n/g' <<<"$ME"
       run: |
-        echo $Identity$ME
+        echo $Identity$SPLIT
     - name: print secrets
       run: |
           echo $ME >> .env
