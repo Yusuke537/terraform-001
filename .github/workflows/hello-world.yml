@@ -16,7 +16,7 @@ jobs:
         echo Hello World!
     - shell: bash
       env:
-        Identity: This is me
+        Identity: This is me 
         ME: ${{ secrets.ME }}
       run: |
-        echo $ME$Identity
+        echo $Identity$ME
