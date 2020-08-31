@@ -2,7 +2,13 @@
 #The name of the workflow, will be displayed on the Github actions page
 name: Terraform
 # when to execute it, similar to Azure DevOps trigger keyword 
-on: push
+on: 
+  push:
+    branches:
+      - feature
+  pull_request:
+      branches: 
+        - master
 
 # list of jobs to execute
 jobs:
@@ -17,6 +23,10 @@ jobs:
     # which OS to use when running this action
     runs-on: ubuntu-latest
     steps:
+    - name: Test
+      run: |
+        echo ${{ github.ref }}  ${{ github.ref }}
+
     - name: Checkout
       uses: actions/checkout@v2
 
