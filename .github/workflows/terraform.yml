@@ -7,8 +7,9 @@ on:
     branches:
       - feature
   pull_request:
-      branches: 
-        - master
+    types: [closed]
+    branches: 
+      - master
 
 # list of jobs to execute
 jobs:
@@ -25,7 +26,7 @@ jobs:
     steps:
     - name: Test
       run: |
-        echo ${{ github.ref }}  ${{ github.ref }}
+        echo ${{ github.ref }}  ${{ github.event }}
 
     - name: Checkout
       uses: actions/checkout@v2
