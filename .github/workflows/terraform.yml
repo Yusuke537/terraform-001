@@ -23,17 +23,17 @@ jobs:
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v1.1.0
 
-    - name: Terraform Init
-      id: init
-      run: terraform init $SOURCE_DIR
+    #- name: Terraform Init
+    #  id: init
+    #  run: terraform init $SOURCE_DIR
 
-    - name: Terraform Validate
-      id: validate
-      run: terraform validate $SOURCE_DIR -no-color
+    #- name: Terraform Validate
+    #  id: validate
+    #  run: terraform validate $SOURCE_DIR -no-color
 
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan $SOURCE_DIR -no-color
+    #- name: Terraform Plan
+    #  id: plan
+    #  run: terraform plan $SOURCE_DIR -no-color
 
     #- name: Terraform Apply
     #  if: github.ref == 'refs/heads/master' && github.event_name = 'push'
