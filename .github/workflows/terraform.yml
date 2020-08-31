@@ -1,1 +1,24 @@
- 
+# .github/workflows/hello-world.yml
+#The name of the workflow, will be displayed on the Github actions page
+name: Terraform
+# when to execute it, similar to Azure DevOps trigger keyword
+on: push
+
+# list of jobs to execute
+jobs:
+  terraform-job:
+    name: Terraform
+    # which OS to use when running this action
+    runs-on: ubuntu-latest
+    steps:
+    - name: HashiCorp - Setup Terraform
+      uses: hashicorp/setup-terraform@v1.1.0
+    - name: Init
+      id: init
+      run: terraform init
+    - name: Validate
+      id: validate
+      run: terraform validate
+    - name: Plan
+      id: plan
+      run: terraform plan
