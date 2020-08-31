@@ -25,7 +25,7 @@ jobs:
     steps:
     - name: Test
       run: |
-        echo ${{ github.ref }}  ${{ github.event.pull_request.closed }}
+        echo ${{ github.ref }}  ${{ github.event.pull_request.merged }}
 
     - name: Checkout
       uses: actions/checkout@v2
