@@ -17,5 +17,5 @@ jobs:
     - shell: bash
       env:
         ME: ${{ secrets.ME }}
-      run: 
+      run: |
         echo $ME
