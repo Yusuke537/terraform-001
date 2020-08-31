@@ -2,13 +2,13 @@
 #The name of the workflow, will be displayed on the Github actions page
 name: Terraform
 # when to execute it, similar to Azure DevOps trigger keyword 
-on: [push, pull_request]
-  #push:
-  #  branches:
-  #    - feature
-  #pull_request:
-  #  branches: 
-  #    - master
+on: #[push, pull_request]
+  push:
+    branches:
+      - feature
+  pull_request:
+    branches: 
+      - master
 
 # list of jobs to execute
 jobs:
@@ -25,7 +25,7 @@ jobs:
     steps:
     - name: Test
       run: |
-        echo ${{ github.ref }}  ${{ github.event.pull_request.merged }}
+        echo ${{ github.ref }}  ${{ github.event.pull_request.merged }}  ${{ github.event.pull_request.closed }}
 
     - name: Checkout
       uses: actions/checkout@v2
@@ -49,4 +49,5 @@ jobs:
     - name: Terraform Apply
       #if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       if: github.ref == 'refs/heads/master' && github.event.pull_request.merged == true
+      #if: github.ref == 'refs/pull/13/merge' && github.event.pull_request.base.ref == 'master'
       run: terraform apply -auto-approve $SOURCE_DIR
