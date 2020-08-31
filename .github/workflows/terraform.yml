@@ -2,13 +2,13 @@
 #The name of the workflow, will be displayed on the Github actions page
 name: Terraform
 # when to execute it, similar to Azure DevOps trigger keyword
-on: 
-  push:
-    branches:
-      - feature
-  pull_request:
-    branches: 
-      - master
+on: [push, pull_request]
+  #push:
+  #  branches:
+  #    - feature
+  #pull_request:
+  #  branches: 
+  #    - master
 
 # list of jobs to execute
 jobs:
@@ -43,6 +43,7 @@ jobs:
 
     - name: Terraform Plan
       id: plan
+      if: github.event_name == 'pull_request'
       run: terraform plan $SOURCE_DIR -no-color
 
     - name: Terraform Apply
