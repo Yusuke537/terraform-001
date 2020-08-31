@@ -1,7 +1,7 @@
 # .github/workflows/hello-world.yml
 #The name of the workflow, will be displayed on the Github actions page
 name: Terraform
-# when to execute it, similar to Azure DevOps trigger keyword
+# when to execute it, similar to Azure DevOps trigger keyword 
 on: [push, pull_request]
   #push:
   #  branches:
