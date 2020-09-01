@@ -2,6 +2,11 @@
 #The name of the workflow, will be displayed on the Github actions page
 name: Test
 
+on: #[push, pull_request]
+  push:
+    branches:
+      - feature
+
 # list of jobs to execute
 jobs:
   build:
