@@ -19,13 +19,29 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-      SOURCE_DIR: ${{ github.workspace }}/src/01-simple-network
+      SOURCE_DIR: ${{ github.workspace }}/src/infra/
+
     # which OS to use when running this action
     runs-on: ubuntu-latest
     steps:
     - name: Test
       run: |
         echo ${{ github.ref }}  ${{ github.event.pull_request.merged }}  ${{ github.event.pull_request.closed }}
+
+    - name: SourceProd
+      if: github.ref == 'refs/heads/master'
+      env:
+        SOURCE_DIR: ${{ github.workspace }}/src/infra/prod
+
+    - name: SourceDev
+      if: github.ref == 'refs/heads/dev'
+      env:
+        SOURCE_DIR: ${{ github.workspace }}/src/infra/dev
+
+    - name: SourceTest
+      if: github.ref == 'refs/heads/feature/*'
+      env:
+        SOURCE_DIR: ${{ github.workspace }}/src/infra/test
 
     - name: Checkout
       uses: actions/checkout@v2
@@ -41,13 +57,13 @@ jobs:
       id: validate
       run: terraform validate $SOURCE_DIR -no-color
 
-    - name: Terraform Plan
-      id: plan
-      if: github.event_name == 'pull_request'
-      run: terraform plan $SOURCE_DIR -no-color
+    #- name: Terraform Plan
+    #  id: plan
+    #  if: github.event_name == 'pull_request'
+    #  run: terraform plan $SOURCE_DIR -no-color
 
-    - name: Terraform Apply
-      #if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      if: github.ref == 'refs/heads/master' && github.event.pull_request.merged == true
-      #if: github.ref == 'refs/pull/13/merge' && github.event.pull_request.base.ref == 'master'
-      run: terraform apply -auto-approve $SOURCE_DIR
+    #- name: Terraform Apply
+    #  #if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    #  if: github.ref == 'refs/heads/master' && github.event.pull_request.merged == true
+    #  #if: github.ref == 'refs/pull/13/merge' && github.event.pull_request.base.ref == 'master'
+    #  run: terraform apply -auto-approve $SOURCE_DIR

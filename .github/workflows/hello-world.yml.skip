@@ -4,27 +4,26 @@ name: Continuous Deployment
 # when to execute it, similar to Azure DevOps trigger keyword
 on: push
 
-## list of jobs to execute
-#jobs:
-#  hello-job:
-#    name: Greeting
-#    # which OS to use when running this action
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Print a greeting
-#      run: |
-#        echo Hello World!
-#    - shell: bash
-#      env:
-#        Identity: This is me 
-#        ME: ${{ secrets.ME }}
-#      run: |
-#        echo $Identity 
-#    - name: print secrets
-#      run: |
-#          echo $ME >> .env
-#          cat .env
-#      shell: bash
-#      env:
-#        ME : ${{secrets.ME}}
-#
+# list of jobs to execute
+jobs:
+  hello-job:
+    name: Greeting
+    # which OS to use when running this action
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print a greeting
+      run: |
+        echo Hello World!
+    - shell: bash
+      env:
+        Identity: This is me 
+        ME: ${{ secrets.ME }}
+      run: |
+        echo $Identity 
+    - name: print secrets
+      run: |
+          echo $ME >> .env
+          cat .env
+      shell: bash
+      env:
+        ME : ${{secrets.ME}}
