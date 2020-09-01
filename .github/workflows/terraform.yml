@@ -36,7 +36,7 @@ jobs:
     - name: SourceDev
       if: github.ref == 'refs/heads/dev'
       env:
-        SUBDIR: ${{SOURCE_DIR}}dev
+        SUBDIR: $SOURCE_DIR dev
       run: echo 1
 
     - name: SourceTest
