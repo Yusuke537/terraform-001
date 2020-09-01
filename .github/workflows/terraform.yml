@@ -43,7 +43,7 @@ jobs:
       if: github.ref == 'refs/heads/feature'
       env:
         SOURCE_DIR: ${{ github.workspace }}/src/infra/test
-      run: echo 1
+      run: echo "$SOURCE_DIR"
 
     - name: Checkout
       uses: actions/checkout@v2
