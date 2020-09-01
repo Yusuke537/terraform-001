@@ -33,3 +33,7 @@ jobs:
         id: echo_gitref
         run:  |
           echo ${{ steps.extract_gitref.outputs.branch }}
+
+      - name: Github event_name
+        run: |
+          echo ${{ github.event_name }}
