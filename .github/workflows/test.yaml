@@ -37,3 +37,7 @@ jobs:
       - name: Github event_name
         run: |
           echo ${{ github.event_name }}
+
+      - name: Github event
+        run: |
+          echo ${{ github.event }}
