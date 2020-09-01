@@ -42,8 +42,8 @@ jobs:
     - name: SourceTest
       if: github.ref == 'refs/heads/feature'
       env:
-        SOURCE_DIR: ${{ github.workspace }}/src/infra/test
-      run: echo "$SOURCE_DIR"
+        SUBDIR: SOURCE_DIR test
+      run: echo "$SUBDIR"
 
     - name: Checkout
       uses: actions/checkout@v2
