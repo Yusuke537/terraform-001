@@ -28,18 +28,18 @@ jobs:
       run: |
         echo ${{ github.ref }}  ${{ github.event.pull_request.merged }}  ${{ github.event.pull_request.closed }}
 
-    - name: SourceProd
-      if: github.ref == 'refs/heads/master'
+    #- name: SourceProd
+    #  if: github.ref == 'refs/heads/master'
       #env:
       #  SOURCE_DIR: ${{ github.workspace }}/src/infra/prod
 
-    - name: SourceDev
-      if: github.ref == 'refs/heads/dev'
+    #- name: SourceDev
+    #  if: github.ref == 'refs/heads/dev'
       #env:
       #  SOURCE_DIR: ${{ github.workspace }}/src/infra/dev
 
-    - name: SourceTest
-      if: github.ref == 'refs/heads/feature/*'
+    #- name: SourceTest
+    #  if: github.ref == 'refs/heads/feature/*'
       #env:
       #  SOURCE_DIR: ${{ github.workspace }}/src/infra/test
 
