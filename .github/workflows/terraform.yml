@@ -39,10 +39,11 @@ jobs:
         SUBDIR: SOURCE_DIR dev
       run: echo 1
 
-    #- name: SourceTest
-    #  if: github.ref == 'refs/heads/feature/*'
-      #env:
-      #  SOURCE_DIR: ${{ github.workspace }}/src/infra/test
+    - name: SourceTest
+      if: github.ref == 'refs/heads/feature/*'
+      env:
+        SOURCE_DIR: ${{ github.workspace }}/src/infra/test
+      run: echo $SOURCE_DIR
 
     - name: Checkout
       uses: actions/checkout@v2
