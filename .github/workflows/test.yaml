@@ -40,4 +40,4 @@ jobs:
 
       - name: Github event
         run: |
-          echo ${{ github.event }}
+          echo ${{ github.event.pull_request.action }} and ${{ github.event.pull_request.pull_request.merged }}
