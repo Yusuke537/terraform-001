@@ -33,10 +33,10 @@ jobs:
       #env:
       #  SOURCE_DIR: ${{ github.workspace }}/src/infra/prod
 
-    #- name: SourceDev
-    #  if: github.ref == 'refs/heads/dev'
-      #env:
-      #  SOURCE_DIR: ${{ github.workspace }}/src/infra/dev
+    - name: SourceDev
+      if: github.ref == 'refs/heads/dev'
+      env:
+        SOURCE_DIR: ${{ github.workspace }}/src/infra/dev
 
     #- name: SourceTest
     #  if: github.ref == 'refs/heads/feature/*'
