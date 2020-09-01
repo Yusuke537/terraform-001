@@ -33,16 +33,16 @@ jobs:
       #env:
       #  SOURCE_DIR: ${{ github.workspace }}/src/infra/prod
 
-    - name: SourceDev
-      if: github.ref == 'refs/heads/dev'
-      env:
-        SUBDIR: $SOURCE_DIR dev
-      run: echo 1
+    #- name: SourceDev
+    #  if: github.ref == 'refs/heads/dev'
+    #  env:
+    #    SUBDIR: $SOURCE_DIR dev
+    #  run: echo 1
 
     - name: SourceTest
       if: github.ref == 'refs/heads/feature'
       env:
-        SUBDIR: SOURCE_DIR test
+        SUBDIR: $SOURCE_DIR'test'
       run: echo "$SUBDIR"
 
     - name: Checkout
