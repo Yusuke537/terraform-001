@@ -23,3 +23,13 @@ jobs:
         id: echo_branch
         run:  |
           echo ${{ steps.extract_branch.outputs.branch }}
+
+      - name: Get gitref
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF})"
+        id: extract_gitref
+
+      - name: Echo gitref
+        id: echo_gitref
+        run:  |
+          echo ${{ steps.extract_gitref.outputs.branch }}
