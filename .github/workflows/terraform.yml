@@ -1,3 +1,9 @@
+#TODO:
+#In order to run on those things, do the following:
+#! Define on listener for pull_request with targets [closed] 
+#? Still decide how to define the folders to use based on the branches pushed...
+#! Always run apply on either pushing to master or on pull request action closed with merged true for master
+
 # .github/workflows/hello-world.yml
 #The name of the workflow, will be displayed on the Github actions page
 name: Terraform
@@ -5,10 +11,10 @@ name: Terraform
 on: #[push, pull_request]
   push:
     branches:
-      - master
+      - master12
   pull_request:
     branches: 
-      - master
+      - master12
 
 # list of jobs to execute
 jobs:
