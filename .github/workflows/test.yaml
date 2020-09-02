@@ -43,3 +43,7 @@ jobs:
       - name: Github event
         run: |
           echo ${{ github.event.action }} and ${{ github.event.pull_request.merged }}
+
+      - name: Github push ref
+        run: |
+          echo ${{ github.event.ref }}
