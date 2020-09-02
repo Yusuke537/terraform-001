@@ -51,7 +51,7 @@ jobs:
 
       - name: Get branchref
         shell: bash
-        run: echo "##[set-output name=branch;]$( IFS="/" read -ra SPLIT_REF <<< ${GITHUB_REF}; echo ${SPLIT_REF[2]}"
+        run: echo "##[set-output name=branch;]$( IFS="/" read -ra SPLIT_REF <<< ${GITHUB_REF}; echo ${SPLIT_REF[2]})"
         id: extract_branchref
 
       - name: Echo gitref
