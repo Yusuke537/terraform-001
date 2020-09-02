@@ -41,12 +41,13 @@ jobs:
       shell: bash
       run: echo "##[set-output name=branch;]$( IFS="/" read -ra SPLIT_REF <<< ${GITHUB_REF}; echo ${SPLIT_REF[2]})"
 
-    - name: SourceProd
+    - name: SourceSubfolder
       id: get_subfolder
+      run: echo ${{steps.extract_branchref.outputs.branch}}
       if: ${{ steps.extract_branchref.outputs.branch }} == 'master' || 
           ${{ steps.extract_branchref.outputs.branch }} == 'feature'||
           ${{ steps.extract_branchref.outputs.branch }} == 'test'
-      run: echo "##[set-output name=subfolder;]$( echo $SOURCE_DIR${{steps.extract_branchref.outputs.branch}} )"
+      #run: echo "##[set-output name=subfolder;]$( echo $SOURCE_DIR${{steps.extract_branchref.outputs.branch}} )"
 
     - name: Test12
       run: echo ${{ steps.get_subfolder.outputs.subfolder }}
