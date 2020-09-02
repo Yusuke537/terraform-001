@@ -8,6 +8,7 @@ on: #[push, pull_request]
   push:
     branches:
       - master
+      - feature
 
 # list of jobs to execute
 jobs:
@@ -47,3 +48,13 @@ jobs:
       - name: Github push ref
         run: |
           echo ${{ github.event.ref }}
+
+      - name: Get branchref
+        shell: bash
+        run: echo "##[set-output name=branch;]$( IFS="/" read -ra SPLIT_REF <<< ${GITHUB_REF}; echo ${SPLIT_REF[2]}"
+        id: extract_branchref
+
+      - name: Echo gitref
+        id: echo_gitref
+        run:  |
+          echo ${{ steps.extract_gitref.outputs.branch }}
