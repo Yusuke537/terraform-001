@@ -49,9 +49,6 @@ jobs:
           ${{ steps.extract_branchref.outputs.branch }} == 'test'
       run: echo "##[set-output name=subfolder;]$( echo ${SOURCE_DIR}${{steps.extract_branchref.outputs.branch}} )"
 
-    - name: Test12
-      run: echo ${{ steps.get_subfolder.outputs.subfolder }}
-
     #- name: SourceDev
     #  id: DevBranch
     #  if: ${{ steps.extract_branchref.outputs.branch }} == 'feature'
@@ -67,16 +64,16 @@ jobs:
 
     - name: Terraform Init
       id: init
-      run: terraform init ${{ steps.get_subfolder.outputs.branch }}#$SOURCE_DIR
+      run: terraform init ${{ steps.get_subfolder.outputs.subfolder }}#$SOURCE_DIR
 
     - name: Terraform Validate
       id: validate
-      run: terraform validate $SOURCE_DIR -no-color
+      run: terraform validate ${{ steps.get_subfolder.outputs.subfolder }} -no-color
 
     - name: Terraform Plan
       id: plan
       if: github.event_name == 'pull_request' && github.event.action == 'opened' #&& github.event.pull_request.merged == true
-      run: terraform plan $SOURCE_DIR -no-color
+      run: terraform plan ${{ steps.get_subfolder.outputs.subfolder }} -no-color
 
     - name: Terraform Apply
       #if: github.ref == 'refs/heads/master' && github.event_name == 'push'
