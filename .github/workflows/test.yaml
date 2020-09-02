@@ -55,6 +55,6 @@ jobs:
         id: extract_branchref
 
       - name: Echo gitref
-        id: echo_gitref
+        id: echo_branchref
         run:  |
-          echo ${{ steps.extract_gitref.outputs.branch }}
+          echo ${{ steps.extract_branchref.outputs.branch }}
