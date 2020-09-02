@@ -31,37 +31,37 @@ jobs:
     # which OS to use when running this action
     runs-on: ubuntu-latest
     steps:
-    - name: Extract branchref
-      shell: bash
-      run: echo "##[set-output name=branch;]$( IFS="/" read -ra SPLIT_REF <<< ${GITHUB_REF}; echo ${SPLIT_REF[2]})"
-      id: extract_branchref
-
-    #- name: SourceProd
-    #  if: github.ref == 'refs/heads/master'
-      #env:
-      #  SOURCE_DIR: ${{ github.workspace }}/src/infra/prod
-
-    #- name: SourceDev
-    #  if: github.ref == 'refs/heads/dev'
-    #  env:
-    #    SUBDIR: $SOURCE_DIR dev
-    #  run: echo 1
-
-    - name: SourceTest
-      if: github.ref == 'refs/heads/feature'
-      env:
-        SUBDIR: $SOURCE_DIR'test'
-      run: echo "$SUBDIR"
-
     - name: Checkout
       uses: actions/checkout@v2
+
+    - name: Extract branchref
+      id: extract_branchref
+      shell: bash
+      run: echo "##[set-output name=branch;]$( IFS="/" read -ra SPLIT_REF <<< ${GITHUB_REF}; echo ${SPLIT_REF[2]})"
+
+    - name: SourceProd
+      id: get_subfolder
+      if: ${{ steps.extract_branchref.outputs.branch }} == 'master' || 
+          ${{ steps.extract_branchref.outputs.branch }} == 'feature'||
+          ${{ steps.extract_branchref.outputs.branch }} == 'test'
+      run: echo "##[set-output name=subfolder;]$( echo $SOURCE_DIR${{steps.extract_branchref.outputs.branch}} )"
+
+    #- name: SourceDev
+    #  id: DevBranch
+    #  if: ${{ steps.extract_branchref.outputs.branch }} == 'feature'
+    #  run: echo "##[set-output name=subfolder;]$( echo $SOURCE_DIR${{steps.extract_branchref.outputs.branch}} )"
+
+    #- name: SourceTest
+    #  id: TestBranch
+    #  if: ${{ steps.extract_branchref.outputs.branch }} == 'test'
+    #  run: echo "##[set-output name=subfolder;]$( echo $SOURCE_DIR${{steps.extract_branchref.outputs.branch}} )"
 
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v1.1.0
 
     - name: Terraform Init
       id: init
-      run: terraform init $SOURCE_DIR
+      run: terraform init ${{ steps.get_subfolder.outputs.branch }}#$SOURCE_DIR
 
     - name: Terraform Validate
       id: validate
