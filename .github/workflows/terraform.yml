@@ -43,7 +43,7 @@ jobs:
 
     - name: SourceSubfolder
       id: get_subfolder
-      run: echo ${{SOURCE_DIR}}${{steps.extract_branchref.outputs.branch}}
+      run: echo ${SOURCE_DIR}${{steps.extract_branchref.outputs.branch}}
       if: ${{ steps.extract_branchref.outputs.branch }} == 'master' || 
           ${{ steps.extract_branchref.outputs.branch }} == 'feature'||
           ${{ steps.extract_branchref.outputs.branch }} == 'test'
