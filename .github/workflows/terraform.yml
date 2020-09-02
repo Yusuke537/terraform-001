@@ -49,7 +49,7 @@ jobs:
       run: echo "##[set-output name=subfolder;]$( echo $SOURCE_DIR${{steps.extract_branchref.outputs.branch}} )"
 
     - name: Test12
-      run: echo ${{ steps.get_subfolder.outputs.branch }}
+      run: echo ${{ steps.get_subfolder.outputs.subfolder }}
 
     #- name: SourceDev
     #  id: DevBranch
