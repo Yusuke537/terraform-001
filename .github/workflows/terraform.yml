@@ -48,6 +48,9 @@ jobs:
           ${{ steps.extract_branchref.outputs.branch }} == 'test'
       run: echo "##[set-output name=subfolder;]$( echo $SOURCE_DIR${{steps.extract_branchref.outputs.branch}} )"
 
+    - name: Test12
+      run: echo ${{ steps.get_subfolder.outputs.branch }}
+
     #- name: SourceDev
     #  id: DevBranch
     #  if: ${{ steps.extract_branchref.outputs.branch }} == 'feature'
