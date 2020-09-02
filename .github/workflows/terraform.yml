@@ -11,7 +11,9 @@ name: Terraform
 on: #[push, pull_request]
   push:
     branches:
-      - master12
+      - master
+      - feature
+      - 'test/**'
   pull_request:
     types: [closed]
     branches: 
