@@ -17,7 +17,7 @@ on: #[push, pull_request]
     branches: 
       - master
 
-# list of jobs to execute
+# list of jobs to execute 
 jobs:
   terraform:
     name: Terraform
