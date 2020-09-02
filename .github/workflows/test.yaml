@@ -5,9 +5,9 @@ name: Test
 on: #[push, pull_request]
   pull_request:
     types: [closed]
-  #push:
-  #  branches:
-  #    - feature
+  push:
+    branches:
+      - master
 
 # list of jobs to execute
 jobs:
