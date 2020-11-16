@@ -8,7 +8,7 @@ on: #[push, pull_request]
   push:
     branches:
       - master
-      - feature
+      #- feature
 
 # list of jobs to execute
 jobs:

@@ -39,7 +39,7 @@ jobs:
         with:
           directory: $SOURCE_DIR
           #skip-check: CKV_AWS_1
-          quiet: true
+          quiet: false
           framework: terraform
 
   terraform:
