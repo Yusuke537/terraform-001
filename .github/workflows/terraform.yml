@@ -12,6 +12,7 @@ on: #[push, pull_request]
   push:
     branches:
       - master12
+      - feature
   pull_request:
     types: [closed]
     branches: 
@@ -19,6 +20,28 @@ on: #[push, pull_request]
 
 # list of jobs to execute 
 jobs:
+  checkov-job:
+    runs-on: ubuntu-latest
+    name: checkov-action
+    env:
+      #ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      #ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      #ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      #ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      SOURCE_DIR: ${{ github.workspace }}/src/infra/
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      
+      - name: Run Checkov Action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: $SOURCE_DIR
+          #skip-check: CKV_AWS_1
+          quiet: true
+          framework: terraform
+
   terraform:
     name: Terraform
     env:
@@ -67,16 +90,16 @@ jobs:
       id: validate
       run: terraform validate $SOURCE_DIR -no-color
 
-    - name: Terraform Plan
-      id: plan
-      if: github.event_name == 'pull_request' && github.event.action == 'opened' #&& github.event.pull_request.merged == true
-      run: terraform plan $SOURCE_DIR -no-color
+    #- name: Terraform Plan
+    #  id: plan
+    #  if: github.event_name == 'pull_request' && github.event.action == 'opened' #&& github.event.pull_request.merged == true
+    #  run: terraform plan $SOURCE_DIR -no-color
 
-    - name: Terraform Apply
-      #if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      #if: github.ref == 'refs/heads/master' && github.event.pull_request.merged == true
-      #if: github.ref == 'refs/pull/13/merge' && github.event.pull_request.base.ref == 'master'
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-      #run: terraform apply -auto-approve $SOURCE_DIR
-      run: |
-        echo Terraform apply
+    #- name: Terraform Apply
+    #  #if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    #  #if: github.ref == 'refs/heads/master' && github.event.pull_request.merged == true
+    #  #if: github.ref == 'refs/pull/13/merge' && github.event.pull_request.base.ref == 'master'
+    #  if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    #  #run: terraform apply -auto-approve $SOURCE_DIR
+    #  run: |
+    #    echo Terraform apply
