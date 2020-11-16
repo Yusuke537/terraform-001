@@ -20,6 +20,8 @@ on: #[push, pull_request]
 
 # list of jobs to execute 
 jobs:
+  #TODO: Either put an if condition and run job only when github.push.sourcefile condition = TF directory, probably also based on branch, or create a new yaml file specific for Checkov and run it only on the TF directory
+  #?I was lazy and didn't want to write the condition now
   checkov-job:
     runs-on: ubuntu-latest
     name: checkov-action
@@ -28,7 +30,7 @@ jobs:
       #ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       #ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       #ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-      SOURCE_DIR: ${{ github.workspace }}/src/infra/test
+      SOURCE_DIR: ${{ github.workspace }}/src/infra/test/
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
